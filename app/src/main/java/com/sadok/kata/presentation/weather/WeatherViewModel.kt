@@ -44,7 +44,7 @@ class WeatherViewModel @Inject constructor(
     private val cities = listOf("Rennes", "Paris", "Nantes", "Bordeaux", "Lyon")
 
     private fun getWeatherByListCityName(cities: List<String>) = viewModelScope.launch(Dispatchers.IO) {
-        val delayTime = 1000L
+        val delayTime = 10000L
         val nbRequest = 6
         _weatherState.value = WeatherState(true)
 
@@ -83,7 +83,7 @@ class WeatherViewModel @Inject constructor(
 
     private fun getMessageLoading() = viewModelScope.launch(Dispatchers.IO) {
         getMessageJob?.cancel()
-        getMessageJob = getMessageUseCase(loadingMessages, maxTime = 60000, refreshInterval = 1000)
+        getMessageJob = getMessageUseCase(loadingMessages, maxTime = 60000, refreshInterval = 6000)
             .onEach {
                 _loadingMessageState.value = it
                 println("getMessageLoading "+_loadingMessageState.value)
